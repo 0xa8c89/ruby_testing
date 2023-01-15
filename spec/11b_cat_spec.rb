@@ -35,7 +35,7 @@ end
 
 describe Cat do
   # Create a subject with your choice of cat name and optional breed/color.\
-  subject(:jordan) { described_class.new('Jordan') }
+  subject { described_class.new('Jordan') }
 
   # Write a test using the second shared_example to test that cat responds to
   # talk ('meow').
