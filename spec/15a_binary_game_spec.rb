@@ -108,7 +108,7 @@ describe BinaryGame do
 
       # When you want to read an instance variable's value that does not need to
       # have a reader method, you can use instance_variable_get
-      # https://www.rubydoc.info/stdlib/core/2.0.0/Object:instance_variable_get
+      # https://www.artofunittesting.com/definition-of-a-unit-test
 
       it 'stops loop and does not display error message' do
         min = game_input.instance_variable_get(:@minimum)
@@ -130,17 +130,29 @@ describe BinaryGame do
 
     context 'when user inputs an incorrect value once, then a valid input' do
       before do
+        allow(game_input).to receive(:gets).and_return('19', '5')
       end
 
-      xit 'completes loop and displays error message once' do
+      it 'completes loop and displays error message once' do
+        min = game_input.instance_variable_get(:@minimum)
+        max = game_input.instance_variable_get(:@maximum)
+        error_message = "Input error! Please enter a number between #{min} or #{max}."
+        expect(game_input).to receive(:puts).with(error_message).once
+        game_input.player_input(min, max)
       end
     end
 
     context 'when user inputs two incorrect values, then a valid input' do
       before do
+        allow(game_input).to receive(:gets).and_return('19', '23', '4')
       end
 
-      xit 'completes loop and displays error message twice' do
+      it 'completes loop and displays error message twice' do
+        min = game_input.instance_variable_get(:@minimum)
+        max = game_input.instance_variable_get(:@maximum)
+        error_message = "Input error! Please enter a number between #{min} or #{max}."
+        expect(game_input).to receive(:puts).with(error_message).twice
+        game_input.player_input(min, max)
       end
     end
   end
