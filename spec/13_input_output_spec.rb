@@ -175,11 +175,11 @@ describe NumberGame do
     # Write a test for the following context.
     context 'when user inputs two incorrect values, then a valid input' do
       before do
-        allow(game_loop).to receive(:player_input).and_return('a', 'z', '1')
+        allow(game_loop).to receive(:player_input).and_return('a', 'z', '1') # <- stub
       end
 
       it 'completes loop and displays error message twice' do
-        expect(game_loop).to receive(:puts).with('Input error!').twice
+        expect(game_loop).to receive(:puts).with('Input error!').twice # <- mock
         game_loop.player_turn
       end
     end
